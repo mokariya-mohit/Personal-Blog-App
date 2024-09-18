@@ -1,0 +1,29 @@
+<%- include('partials/header', { title: 'Blog Posts' }) %>
+    <section class="posts-list">
+        <h2>All Blog Posts</h2>
+        <% if (posts.length> 0) { %>
+            <div class="posts-grid">
+                <% posts.forEach(post=> { %>
+                    <div class="post-card">
+                        <h3>
+                            <%= post.title %>
+                        </h3>
+                        <p>
+                            <%= post.content.substring(0, 100) %>...
+                        </p>
+                        <div class="post-actions">
+                            <a href="/posts/edit/<%= post._id %>" class="btn edit-btn"><i class="fas fa-edit"></i>
+                                Edit</a>
+                            <form action="/posts/delete/<%= post._id %>" method="POST" class="inline-form">
+                                <button type="submit" class="btn delete-btn"><i class="fas fa-trash"></i>
+                                    Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+            <% } else { %>
+                <p>No posts available. Start by adding one!</p>
+                <% } %>
+    </section>
+    <%- include('partials/footer') %>
